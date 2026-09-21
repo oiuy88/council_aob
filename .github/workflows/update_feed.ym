@@ -6,7 +6,7 @@ on:
     # Run every 15 minutes
     - cron: "*/15 * * * *"
 
-  # Allows you to run it manually from GitHub
+  # Also allow manual runs
   workflow_dispatch:
 
 permissions:
@@ -27,11 +27,11 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Generate AOB feed
+      - name: Generate AOB RSS
         run: |
           python filter_rss.py
 
-      - name: Commit updated feed
+      - name: Commit feed if changed
         run: |
 
           git config user.name \
@@ -43,9 +43,9 @@ jobs:
           git add aob.xml
 
           if git diff --cached --quiet; then
-            echo "No changes."
+            echo "No changes to commit."
           else
-            git commit -m "Update AOB RSS"
+            git commit -m "Update AOB RSS feed"
             git push
           fi
 ```
