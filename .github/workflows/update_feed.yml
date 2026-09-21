@@ -37,4 +37,3 @@ jobs:
             git commit -m "Update Council AOB RSS"
             git push
           fi
-```
