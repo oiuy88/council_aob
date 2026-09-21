@@ -1,45 +1,51 @@
-name: Generate RSS Feed
+```yaml
+name: Update Consilium AOB RSS
 
 on:
   schedule:
-    - cron: '0 */2 * * *'
+    # Run every 15 minutes
+    - cron: "*/15 * * * *"
+
+  # Allows you to run it manually from GitHub
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  update-feed:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
-      - name: Install Dependencies
+      - name: Generate AOB feed
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python filter_rss.py
 
-      - name: Run Scraper
-        run: python scraper.py
-
-      - name: Verify feed.xml Creation
+      - name: Commit updated feed
         run: |
-          if [ ! -f feed.xml ]; then
-            echo "feed.xml was not created by scraper.py!"
-            exit 1
+
+          git config user.name \
+            "github-actions[bot]"
+
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add aob.xml
+
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Update AOB RSS"
+            git push
           fi
-
-      - name: Commit and Push Updated Feed
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add feed.xml
-          git commit -m "Update RSS feed" || echo "No changes to commit"
-          git push
+```
