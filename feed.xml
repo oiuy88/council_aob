@@ -1,1 +1,12 @@
-
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Consilium Council Documents — AOB</title>
+    <link>https://www.consilium.europa.eu/en/documents/public-register/</link>
+    <description>Latest public and non-public Council documents from the Consilium RSS feed whose title contains AOB.</description>
+    <language>en</language>
+    <generator>GitHub Actions — Council AOB RSS</generator>
+    <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
+    <lastBuildDate>Mon, 21 Sep 2026 10:24:36 +0000</lastBuildDate>
+  </channel>
+</rss>
