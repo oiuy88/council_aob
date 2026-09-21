@@ -1,4 +1,6 @@
 ```python
+import copy
+import re
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -9,18 +11,23 @@ from email.utils import format_datetime
 # CONFIGURATION
 # ============================================================
 
-# Consilium's "Latest Council documents — Public and non-public"
+# Consilium: Latest Council documents
+# PUBLIC + NON-PUBLIC documents
 SOURCE_RSS = (
     "https://www.consilium.europa.eu/en/register/rss/LD.xml"
 )
 
-# Only items whose title contains this text are included.
+# Match AOB as a separate word, case-insensitive.
 KEYWORD = "AOB"
 
-# Output file
+# Maximum number of matching documents to keep.
+MAX_ITEMS = 100
+
+# Generated RSS filename.
 OUTPUT_FILE = "aob.xml"
 
-# Change these to your GitHub Pages URL
+# IMPORTANT:
+# Change this to your actual GitHub Pages URL.
 FEED_URL = (
     "https://YOUR-USERNAME.github.io/"
     "YOUR-REPOSITORY/aob.xml"
@@ -29,16 +36,17 @@ FEED_URL = (
 FEED_TITLE = "Consilium Council Documents — AOB"
 
 FEED_DESCRIPTION = (
-    "Public and non-public Council documents from the "
-    "Consilium RSS feed whose title contains AOB."
+    "Latest public and non-public Council documents "
+    "from Consilium whose title contains AOB."
 )
 
 
 # ============================================================
-# DOWNLOAD CONSILIUM RSS
+# DOWNLOAD SOURCE RSS
 # ============================================================
 
 def download_feed():
+
     request = urllib.request.Request(
         SOURCE_RSS,
         headers={
@@ -58,11 +66,114 @@ def download_feed():
         request,
         timeout=60
     ) as response:
+
         return response.read()
 
 
 # ============================================================
-# FILTER ITEMS
+# FIND TITLE
+# ============================================================
+
+def get_title(item):
+
+    # Normal RSS title
+    title = item.find("title")
+
+    if title is not None and title.text:
+        return title.text.strip()
+
+    # Handle namespaced title, just in case.
+    for child in item:
+
+        if child.tag.endswith("}title"):
+
+            if child.text:
+                return child.text.strip()
+
+    return ""
+
+
+# ============================================================
+# AOB MATCHING
+# ============================================================
+
+def title_contains_keyword(title):
+
+    # Match AOB as a separate word.
+    #
+    # Matches:
+    #   "ST 12345 2026 INIT - AOB"
+    #   "AOB - Draft conclusions"
+    #   "aob"
+    #
+    # Does NOT match:
+    #   "AOBXYZ"
+    #   "MYAOBDOCUMENT"
+
+    pattern = r"\b" + re.escape(KEYWORD) + r"\b"
+
+    return bool(
+        re.search(
+            pattern,
+            title,
+            flags=re.IGNORECASE
+        )
+    )
+
+
+# ============================================================
+# DATE PARSING
+# ============================================================
+
+def get_pub_date(item):
+
+    for tag in (
+        "pubDate",
+        "date",
+        "published",
+        "updated",
+    ):
+
+        element = item.find(tag)
+
+        if element is not None and element.text:
+            return element.text.strip()
+
+    return ""
+
+
+def sort_key(item):
+
+    value = get_pub_date(item)
+
+    if not value:
+        return datetime.min.replace(
+            tzinfo=timezone.utc
+        )
+
+    # RSS dates normally look like:
+    # Wed, 16 Sep 2026 12:00:00 GMT
+
+    try:
+        from email.utils import parsedate_to_datetime
+
+        date = parsedate_to_datetime(value)
+
+        if date.tzinfo is None:
+            date = date.replace(
+                tzinfo=timezone.utc
+            )
+
+        return date
+
+    except Exception:
+        return datetime.min.replace(
+            tzinfo=timezone.utc
+        )
+
+
+# ============================================================
+# FILTER
 # ============================================================
 
 def filter_items(source_xml):
@@ -73,42 +184,51 @@ def filter_items(source_xml):
 
     if channel is None:
         raise RuntimeError(
-            "The Consilium RSS feed has no channel element."
+            "Consilium RSS does not contain <channel>."
         )
 
-    items = channel.findall("item")
+    source_items = channel.findall("item")
 
     matching = []
 
-    for item in items:
+    for item in source_items:
 
-        title_element = item.find("title")
+        title = get_title(item)
 
-        if title_element is None:
-            continue
-
-        title = (
-            title_element.text or ""
-        ).strip()
-
-        # Case-insensitive title matching.
-        if KEYWORD.casefold() in title.casefold():
+        if title_contains_keyword(title):
             matching.append(item)
 
-    print(f"Items received: {len(items)}")
-    print(
-        f"Items containing '{KEYWORD}': "
-        f"{len(matching)}"
+    # Newest first.
+    matching.sort(
+        key=sort_key,
+        reverse=True
     )
+
+    # Keep only the latest 100.
+    matching = matching[:MAX_ITEMS]
+
+    print(
+        f"Source items: {len(source_items)}"
+    )
+
+    print(
+        f"AOB matches: {len(matching)}"
+    )
+
+    for item in matching[:10]:
+        print(
+            "  ",
+            get_title(item)
+        )
 
     return matching
 
 
 # ============================================================
-# CREATE CUSTOM RSS
+# BUILD RSS
 # ============================================================
 
-def create_feed(items):
+def build_feed(items):
 
     rss = ET.Element(
         "rss",
@@ -155,15 +275,10 @@ def create_feed(items):
         "GitHub Actions — Consilium AOB RSS"
     )
 
-    ET.SubElement(
+    # Self URL for RSS readers.
+    atom_link = ET.SubElement(
         channel,
-        "atom:link"
-    )
-
-    atom_link = channel[-1]
-
-    atom_link.tag = (
-        "{http://www.w3.org/2005/Atom}link"
+        "{http://www.w3.org/2005/Atom}link",
     )
 
     atom_link.set(
@@ -188,36 +303,23 @@ def create_feed(items):
         datetime.now(timezone.utc)
     )
 
-    # Copy the original Consilium items.
+    # Copy the original Consilium <item> completely.
+    #
+    # This preserves:
+    # - title
+    # - link
+    # - GUID
+    # - publication date
+    # - description
+    # - categories
+    # - namespaces
+    # - any additional fields Consilium adds
+    #
     for original_item in items:
 
-        new_item = ET.SubElement(
-            channel,
-            "item"
+        channel.append(
+            copy.deepcopy(original_item)
         )
-
-        for element in original_item:
-
-            new_element = ET.SubElement(
-                new_item,
-                element.tag,
-                element.attrib
-            )
-
-            new_element.text = element.text
-            new_element.tail = element.tail
-
-            # Preserve nested elements.
-            for child in element:
-
-                new_child = ET.SubElement(
-                    new_element,
-                    child.tag,
-                    child.attrib
-                )
-
-                new_child.text = child.text
-                new_child.tail = child.tail
 
     return ET.ElementTree(rss)
 
@@ -229,17 +331,18 @@ def create_feed(items):
 def main():
 
     print(
-        "Downloading Consilium public + non-public RSS..."
+        "Downloading Consilium "
+        "public + non-public RSS..."
     )
 
     source_xml = download_feed()
 
-    matching_items = filter_items(
+    items = filter_items(
         source_xml
     )
 
-    feed = create_feed(
-        matching_items
+    feed = build_feed(
+        items
     )
 
     ET.indent(
@@ -253,9 +356,13 @@ def main():
         xml_declaration=True
     )
 
+    print()
     print(
-        f"Created {OUTPUT_FILE} "
-        f"with {len(matching_items)} items."
+        f"Created {OUTPUT_FILE}"
+    )
+
+    print(
+        f"Number of items: {len(items)}"
     )
 
 
