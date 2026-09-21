@@ -1,61 +1,65 @@
-import datetime
+import os
 import requests
 from bs4 import BeautifulSoup
 from feedgen.feed import FeedGenerator
 
-SEARCH_URL = (
+# Target search URL
+TARGET_URL = (
     "https://www.consilium.europa.eu/en/documents/public-register/"
-    "public-register-search/?WordsInSubject=aob&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC"
+    "public-register-search/?WordsInSubject=aob&WordsInText=&DocumentNumber="
+    "&InterinstitutionalFiles=&DocumentTypes=&DateFrom=&DateTo="
+    "&MeetingDateFrom=&MeetingDateTo=&DocumentLanguage=EN&OrderBy=DOCUMENT_DATE+DESC"
 )
-BASE_URL = "https://www.consilium.europa.eu"
 
-def fetch_and_generate():
-    # 1. Fetch Search Results
+def fetch_search_results():
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
     }
-    response = requests.get(SEARCH_URL, headers=headers)
+    response = requests.get(TARGET_URL, headers=headers)
     response.raise_for_status()
+    return response.text
 
-    soup = BeautifulSoup(response.content, "html.parser")
+def parse_and_generate_rss():
+    html_content = fetch_search_results()
+    soup = BeautifulSoup(html_content, "html.parser")
 
-    # 2. Configure RSS Feed Metadata
     fg = FeedGenerator()
-    fg.id(SEARCH_URL)
-    fg.title("Consilium Public Register - AOB Search Feed")
-    fg.author({"name": "Consilium Search Bot"})
-    fg.link(href=SEARCH_URL, rel="alternate")
-    fg.description("Automated RSS feed for Council Public Register documents with 'aob' in subject.")
-    fg.language("en")
+    fg.id(TARGET_URL)
+    fg.title("Consilium EU Public Register - Search: AOB")
+    fg.author({'name': 'Consilium EU Search Feed'})
+    fg.link(href=TARGET_URL, rel='alternate')
+    fg.description("Automated RSS Feed for Consilium Public Register search (WordsInSubject=aob).")
+    fg.language('en')
 
-    # 3. Extract Document Cards/Items
-    # Note: Consilium uses list/card elements for document search results
-    items = soup.find_all("li", class_="c-search-result") or soup.select(".c-document-card, article, .c-list-item")
+    # Adjust CSS selectors based on Consilium search page layout
+    items = soup.select(".c-search-result__item, .m-document-item, li.c-list-item")
 
     for item in items:
-        title_tag = item.find("a") or item.find("h3")
+        title_tag = item.select_one("a.c-title, .title a, h3 a")
         if not title_tag:
             continue
 
         title = title_tag.get_text(strip=True)
-        link = title_tag.get("href", "")
-        if link and not link.startswith("http"):
-            link = BASE_URL + link
+        link = title_tag.get('href', '')
+        if link.startswith('/'):
+            link = f"https://www.consilium.europa.eu{link}"
 
-        # Extract snippet or additional metadata if available
-        desc_tag = item.find("p") or item.find("div", class_="c-search-result__description")
+        # Extract summary or date if available
+        desc_tag = item.select_one(".c-description, .abstract, p")
         description = desc_tag.get_text(strip=True) if desc_tag else title
 
-        # Create RSS Entry
         fe = fg.add_entry()
         fe.id(link if link else title)
         fe.title(title)
-        fe.link(href=link if link else SEARCH_URL)
+        fe.link(href=link)
         fe.description(description)
-        fe.pubdate(datetime.datetime.now(datetime.timezone.utc))
 
-    # 4. Save to feed.xml
+    fg.rss_str(pretty=True)
     fg.rss_file("feed.xml")
 
 if __name__ == "__main__":
-    fetch_and_generate()
+    parse_and_generate_rss()
