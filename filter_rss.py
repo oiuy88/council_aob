@@ -4,55 +4,57 @@ import re
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
-from email.utils import format_datetime
+from email.utils import format_datetime, parsedate_to_datetime
 
 
 # ============================================================
 # CONFIGURATION
 # ============================================================
 
-# Consilium: Latest Council documents
+# Consilium "Latest Council documents":
 # PUBLIC + NON-PUBLIC documents
 SOURCE_RSS = (
     "https://www.consilium.europa.eu/en/register/rss/LD.xml"
 )
 
-# Match AOB as a separate word, case-insensitive.
+# Only titles containing AOB as a separate word are included.
 KEYWORD = "AOB"
 
-# Maximum number of matching documents to keep.
+# Maximum number of AOB documents kept in the custom feed.
 MAX_ITEMS = 100
 
-# Generated RSS filename.
-OUTPUT_FILE = "aob.xml"
+# Output file.
+OUTPUT_FILE = "feed.xml"
 
-# IMPORTANT:
-# Change this to your actual GitHub Pages URL.
+# Your GitHub Pages RSS URL.
 FEED_URL = (
-    "https://YOUR-USERNAME.github.io/"
-    "YOUR-REPOSITORY/aob.xml"
+    "https://oiuy88.github.io/council_aob/feed.xml"
 )
 
 FEED_TITLE = "Consilium Council Documents — AOB"
 
 FEED_DESCRIPTION = (
     "Latest public and non-public Council documents "
-    "from Consilium whose title contains AOB."
+    "from the Consilium RSS feed whose title contains AOB."
+)
+
+FEED_LINK = (
+    "https://www.consilium.europa.eu/"
+    "en/documents/public-register/"
 )
 
 
 # ============================================================
-# DOWNLOAD SOURCE RSS
+# DOWNLOAD CONSILIUM RSS
 # ============================================================
 
 def download_feed():
-
     request = urllib.request.Request(
         SOURCE_RSS,
         headers={
             "User-Agent": (
                 "Mozilla/5.0 "
-                "(compatible; Consilium-AOB-RSS/1.0)"
+                "(compatible; Council-AOB-RSS/1.0)"
             ),
             "Accept": (
                 "application/rss+xml, "
@@ -66,49 +68,47 @@ def download_feed():
         request,
         timeout=60
     ) as response:
-
         return response.read()
 
 
 # ============================================================
-# FIND TITLE
+# XML HELPERS
 # ============================================================
 
-def get_title(item):
+def get_element_text(item, tag):
+    element = item.find(tag)
 
-    # Normal RSS title
-    title = item.find("title")
-
-    if title is not None and title.text:
-        return title.text.strip()
-
-    # Handle namespaced title, just in case.
-    for child in item:
-
-        if child.tag.endswith("}title"):
-
-            if child.text:
-                return child.text.strip()
+    if element is not None and element.text:
+        return element.text.strip()
 
     return ""
 
 
+def get_title(item):
+    return get_element_text(item, "title")
+
+
+def get_pub_date(item):
+    return get_element_text(item, "pubDate")
+
+
 # ============================================================
-# AOB MATCHING
+# AOB FILTER
 # ============================================================
 
 def title_contains_keyword(title):
+    """
+    Match AOB as a separate word.
 
-    # Match AOB as a separate word.
-    #
-    # Matches:
-    #   "ST 12345 2026 INIT - AOB"
-    #   "AOB - Draft conclusions"
-    #   "aob"
-    #
-    # Does NOT match:
-    #   "AOBXYZ"
-    #   "MYAOBDOCUMENT"
+    Included:
+        "ST 12345 2026 INIT - AOB"
+        "AOB - Draft conclusions"
+        "aob"
+
+    Not included:
+        "AOBXYZ"
+        "MYAOBDOCUMENT"
+    """
 
     pattern = r"\b" + re.escape(KEYWORD) + r"\b"
 
@@ -122,27 +122,10 @@ def title_contains_keyword(title):
 
 
 # ============================================================
-# DATE PARSING
+# DATE SORTING
 # ============================================================
 
-def get_pub_date(item):
-
-    for tag in (
-        "pubDate",
-        "date",
-        "published",
-        "updated",
-    ):
-
-        element = item.find(tag)
-
-        if element is not None and element.text:
-            return element.text.strip()
-
-    return ""
-
-
-def sort_key(item):
+def get_sort_date(item):
 
     value = get_pub_date(item)
 
@@ -151,12 +134,7 @@ def sort_key(item):
             tzinfo=timezone.utc
         )
 
-    # RSS dates normally look like:
-    # Wed, 16 Sep 2026 12:00:00 GMT
-
     try:
-        from email.utils import parsedate_to_datetime
-
         date = parsedate_to_datetime(value)
 
         if date.tzinfo is None:
@@ -173,7 +151,7 @@ def sort_key(item):
 
 
 # ============================================================
-# FILTER
+# FILTER SOURCE FEED
 # ============================================================
 
 def filter_items(source_xml):
@@ -184,48 +162,53 @@ def filter_items(source_xml):
 
     if channel is None:
         raise RuntimeError(
-            "Consilium RSS does not contain <channel>."
+            "The Consilium RSS feed does not contain "
+            "a <channel> element."
         )
 
     source_items = channel.findall("item")
 
-    matching = []
+    matching_items = []
 
     for item in source_items:
 
         title = get_title(item)
 
         if title_contains_keyword(title):
-            matching.append(item)
+            matching_items.append(item)
 
     # Newest first.
-    matching.sort(
-        key=sort_key,
+    matching_items.sort(
+        key=get_sort_date,
         reverse=True
     )
 
-    # Keep only the latest 100.
-    matching = matching[:MAX_ITEMS]
+    # Keep only the newest 100.
+    matching_items = matching_items[:MAX_ITEMS]
 
     print(
-        f"Source items: {len(source_items)}"
+        f"Consilium items received: "
+        f"{len(source_items)}"
     )
 
     print(
-        f"AOB matches: {len(matching)}"
+        f"AOB items found: "
+        f"{len(matching_items)}"
     )
 
-    for item in matching[:10]:
+    print("\nLatest matching documents:")
+
+    for item in matching_items[:10]:
         print(
-            "  ",
+            " -",
             get_title(item)
         )
 
-    return matching
+    return matching_items
 
 
 # ============================================================
-# BUILD RSS
+# CREATE CUSTOM RSS
 # ============================================================
 
 def build_feed(items):
@@ -253,10 +236,7 @@ def build_feed(items):
     ET.SubElement(
         channel,
         "link"
-    ).text = (
-        "https://www.consilium.europa.eu/"
-        "en/documents/public-register/"
-    )
+    ).text = FEED_LINK
 
     ET.SubElement(
         channel,
@@ -272,13 +252,13 @@ def build_feed(items):
         channel,
         "generator"
     ).text = (
-        "GitHub Actions — Consilium AOB RSS"
+        "GitHub Actions — Council AOB RSS"
     )
 
-    # Self URL for RSS readers.
+    # RSS self-reference.
     atom_link = ET.SubElement(
         channel,
-        "{http://www.w3.org/2005/Atom}link",
+        "{http://www.w3.org/2005/Atom}link"
     )
 
     atom_link.set(
@@ -296,6 +276,7 @@ def build_feed(items):
         FEED_URL
     )
 
+    # Feed generation time.
     ET.SubElement(
         channel,
         "lastBuildDate"
@@ -303,18 +284,16 @@ def build_feed(items):
         datetime.now(timezone.utc)
     )
 
-    # Copy the original Consilium <item> completely.
+    # Copy each original Consilium RSS item exactly.
     #
-    # This preserves:
-    # - title
-    # - link
-    # - GUID
-    # - publication date
-    # - description
-    # - categories
-    # - namespaces
-    # - any additional fields Consilium adds
-    #
+    # This preserves the original:
+    #   title
+    #   link
+    #   guid
+    #   pubDate
+    #   description
+    #   categories
+    #   and any other fields supplied by Consilium.
     for original_item in items:
 
         channel.append(
@@ -330,19 +309,23 @@ def build_feed(items):
 
 def main():
 
-    print(
-        "Downloading Consilium "
-        "public + non-public RSS..."
-    )
+    print("=" * 60)
+    print("Consilium AOB RSS generator")
+    print("=" * 60)
+
+    print("\nDownloading:")
+    print(SOURCE_RSS)
 
     source_xml = download_feed()
 
-    items = filter_items(
+    print("Download successful.")
+
+    matching_items = filter_items(
         source_xml
     )
 
     feed = build_feed(
-        items
+        matching_items
     )
 
     ET.indent(
@@ -357,13 +340,10 @@ def main():
     )
 
     print()
-    print(
-        f"Created {OUTPUT_FILE}"
-    )
-
-    print(
-        f"Number of items: {len(items)}"
-    )
+    print("=" * 60)
+    print(f"Created: {OUTPUT_FILE}")
+    print(f"Items:   {len(matching_items)}")
+    print("=" * 60)
 
 
 if __name__ == "__main__":
