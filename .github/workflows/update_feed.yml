@@ -2,71 +2,38 @@
 name: Update Council AOB RSS
 
 on:
-
-  # Run automatically every 15 minutes.
   schedule:
     - cron: "*/15 * * * *"
-
-  # Allows manual execution from:
-  # GitHub → Actions → Update Council AOB RSS → Run workflow
   workflow_dispatch:
 
 permissions:
   contents: write
 
-
 jobs:
-
   update-feed:
-
     runs-on: ubuntu-latest
 
     steps:
-
-      # --------------------------------------------------------
-      # Get repository contents
-      # --------------------------------------------------------
-
       - name: Checkout repository
         uses: actions/checkout@v4
-
-
-      # --------------------------------------------------------
-      # Install Python
-      # --------------------------------------------------------
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
+      - name: Generate RSS feed
+        run: python filter_rss.py
 
-      # --------------------------------------------------------
-      # Generate filtered RSS
-      # --------------------------------------------------------
-
-      - name: Generate AOB RSS
+      - name: Commit changes
         run: |
-          python filter_rss.py
-
-
-      # --------------------------------------------------------
-      # Save feed.xml to GitHub
-      # --------------------------------------------------------
-
-      - name: Commit updated feed
-        run: |
-
-          git config user.name \
-            "github-actions[bot]"
-
-          git config user.email \
-            "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add feed.xml
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "No changes to commit"
           else
             git commit -m "Update Council AOB RSS"
             git push
