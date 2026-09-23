@@ -7,7 +7,21 @@
     <language>en</language>
     <generator>GitHub Actions — Council AOB RSS</generator>
     <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
-    <lastBuildDate>Wed, 23 Sep 2026 12:12:11 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2026 17:01:29 +0000</lastBuildDate>
+    <item>
+      <guid isPermaLink="false">ST-13357-2026-REV-1_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-13357-2026-REV-1/en/pdf</link>
+      <title>ST 13357 2026 REV 1</title>
+      <description>AOB for the meeting of the Competitiveness Council of 24 September 2026: Call for a More Responsive EU De Minimis Aid Framework - Information from Latvia and Bulgaria</description>
+      <ns0:updated>2026-09-23T00:00:00+02:00</ns0:updated>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-13433-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-13433-2026-INIT/en/pdf</link>
+      <title>ST 13433 2026 INIT</title>
+      <description>AOB for the meeting of the Competitiveness Council of 24 September 2026: Definition of Undertakings in Difficulty in the GBER revision - Information from Netherlands, Austria, Belgium, the Czech Republic, France, Germany, Italy, Latvia, Luxemburg, Poland and Slovakia</description>
+      <ns0:updated>2026-09-23T00:00:00+02:00</ns0:updated>
+    </item>
     <item>
       <guid isPermaLink="false">ST-13201-2026-INIT_EN</guid>
       <link>https://data.consilium.europa.eu/doc/document/ST-13201-2026-INIT/en/pdf</link>
@@ -49,20 +63,6 @@
       <description>AOB for the meeting of the Competitiveness Council of 24 September 2026: The Extended Producer Responsibility (EPR) under the Urban Wastewater Treatment Directive (UWWTD) as a barrier to the competitiveness of the European industries - Information from Poland, Czechia and Hungary</description>
       <ns0:updated>2026-09-21T00:00:00+02:00</ns0:updated>
       <ns0:content>AOB for the meeting of the Competitiveness Council of 24 September 2026: The Extended Producer Responsibility (EPR) under the Urban Wastewater Treatment Directive (UWWTD) as a barrier to the competitiveness of the European industries - Information from Poland, Czechia and Hungary&lt;hr/&gt;The content of this document is not accessible. Nevertheless, a request for access can be sent to the &lt;a href="https://www.consilium.europa.eu/en/documents/public-register/request-document/"&gt;Access to documents &lt;/a&gt; department.</ns0:content>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-13316-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-13316-2026-INIT/en/pdf</link>
-      <title>ST 13316 2026 INIT</title>
-      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 28-29 September 2026: Outcome of the MED9 meeting of Ministers of Agriculture and Ministers responsible for demography (Zadar, 5-7 July 2026) - Information from Croatia</description>
-      <ns0:updated>2026-09-18T00:00:00+02:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-13357-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-13357-2026-INIT/en/pdf</link>
-      <title>ST 13357 2026 INIT</title>
-      <description>AOB for the meeting of the Competitiveness Council of 24 September 2026: Call for a More Responsive EU De Minimis Aid Framework - Information from Latvia</description>
-      <ns0:updated>2026-09-18T00:00:00+02:00</ns0:updated>
     </item>
   </channel>
 </rss>
