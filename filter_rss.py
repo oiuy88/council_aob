@@ -86,6 +86,9 @@ def get_element_text(item, tag):
 def get_title(item):
     return get_element_text(item, "title")
 
+def get_description(item):
+    return get_element_text(item, "description")
+
 
 def get_pub_date(item):
     return get_element_text(item, "pubDate")
@@ -170,10 +173,11 @@ def filter_items(source_xml):
     matching_items = []
 
     for item in source_items:
-
         title = get_title(item)
+        description = get_description(item)
 
-        if title_contains_keyword(title):
+        # Check both title and description for AOB
+        if title_contains_keyword(title) or title_contains_keyword(description):
             matching_items.append(item)
 
     # Newest first.
