@@ -7,7 +7,14 @@
     <language>en</language>
     <generator>GitHub Actions — Council AOB RSS</generator>
     <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
-    <lastBuildDate>Thu, 24 Sep 2026 23:22:21 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 01:42:34 +0000</lastBuildDate>
+    <item>
+      <guid isPermaLink="false">ST-13542-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-13542-2026-INIT/en/pdf</link>
+      <title>ST 13542 2026 INIT</title>
+      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 28-29 September 2026: Increasing impact of drought on Slovenian and European agriculture – need for coordinated EU response - Information from Slovenia</description>
+      <ns0:updated>2026-09-24T00:00:00+02:00</ns0:updated>
+    </item>
     <item>
       <guid isPermaLink="false">ST-13585-2026-INIT_EN</guid>
       <title>ST 13585 2026 INIT</title>
@@ -91,34 +98,6 @@
       <title>ST 13527 2026 INIT</title>
       <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 28-29 September 2026: The importance of the CMO for Fruit and Vegetables - Information from Belgium</description>
       <ns0:updated>2026-09-23T00:00:00+02:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-13201-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-13201-2026-INIT/en/pdf</link>
-      <title>ST 13201 2026 INIT</title>
-      <description>AOB for the meeting of the Competitiveness Council of 24 September 2026: The upcoming European Product Regulation - Information from Belgium, France and the Netherlands</description>
-      <ns0:updated>2026-09-22T00:00:00+02:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-13273-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-13273-2026-INIT/en/pdf</link>
-      <title>ST 13273 2026 INIT</title>
-      <description>AOB for the meeting of the Competitiveness Council of 24 September 2026: Advocating for a swift implementation of the key recommendations issued by the EU Critical Chemicals Alliance - Information from the Czech Republic, France, Hungary, Italy, the Netherlands, Portugal, Slovakia and Slovenia</description>
-      <ns0:updated>2026-09-22T00:00:00+02:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-13311-2026-INIT_EN</guid>
-      <title>ST 13311 2026 INIT</title>
-      <description>AOB for the meeting of the Justice and Home Affairs Council of 1 and 2 October 2026: Request for a European Emergency Mechanism to address instrumentalisation and hybrid threats at the EU external borders - Information from the Greek delegation</description>
-      <ns0:updated>2026-09-22T00:00:00+02:00</ns0:updated>
-      <ns0:content>AOB for the meeting of the Justice and Home Affairs Council of 1 and 2 October 2026: Request for a European Emergency Mechanism to address instrumentalisation and hybrid threats at the EU external borders - Information from the Greek delegation&lt;hr/&gt;The content of this document is not accessible. Nevertheless, a request for access can be sent to the &lt;a href="https://www.consilium.europa.eu/en/documents/public-register/request-document/"&gt;Access to documents &lt;/a&gt; department.</ns0:content>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-13470-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-13470-2026-INIT/en/pdf</link>
-      <title>ST 13470 2026 INIT</title>
-      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 28-29 September 2026: Impact of the historic drought on agricultural production, feed availability and animal welfare in Slovakia – need for a timely European response - Information from Slovakia</description>
-      <ns0:updated>2026-09-22T00:00:00+02:00</ns0:updated>
     </item>
   </channel>
 </rss>
