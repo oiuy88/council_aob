@@ -7,7 +7,7 @@
     <language>en</language>
     <generator>GitHub Actions — Council AOB RSS</generator>
     <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
-    <lastBuildDate>Wed, 14 Oct 2026 10:12:05 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 15:10:00 +0000</lastBuildDate>
     <item>
       <guid isPermaLink="false">ST-14252-2026-INIT_EN</guid>
       <link>https://data.consilium.europa.eu/doc/document/ST-14252-2026-INIT/en/pdf</link>
@@ -28,13 +28,6 @@
       <description>AOB for the meeting of the Foreign Affairs Council of 12 October 2026 International Criminal Court - Explanatory note from Belgium and the Netherlands</description>
       <ns0:updated>2026-10-11T00:00:00+02:00</ns0:updated>
       <ns0:content>AOB for the meeting of the Foreign Affairs Council of 12 October 2026 International Criminal Court - Explanatory note from Belgium and the Netherlands&lt;hr/&gt;The content of this document is not accessible. Nevertheless, a request for access can be sent to the &lt;a href="https://www.consilium.europa.eu/en/documents/public-register/request-document/"&gt;Access to documents &lt;/a&gt; department.</ns0:content>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-14077-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-14077-2026-INIT/en/pdf</link>
-      <title>ST 14077 2026 INIT</title>
-      <description>AOB for the meeting of the Council (Environment) on 12 October 2026 Towards a stable and Competitive EU market for Secondary plastic raw materials – Information from Italy</description>
-      <ns0:updated>2026-10-09T00:00:00+02:00</ns0:updated>
     </item>
   </channel>
 </rss>
