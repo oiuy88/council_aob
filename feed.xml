@@ -7,20 +7,27 @@
     <language>en</language>
     <generator>GitHub Actions — Council AOB RSS</generator>
     <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
-    <lastBuildDate>Thu, 15 Oct 2026 22:15:57 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 00:33:03 +0000</lastBuildDate>
+    <item>
+      <guid isPermaLink="false">ST-14289-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-14289-2026-INIT/en/pdf</link>
+      <title>ST 14289 2026 INIT</title>
+      <description>AOB for the meeting of the EPSCO Council of 19 October 2026: Tripartite Social Summit - Information from the Presidency and the Commission</description>
+      <ns0:updated>2026-10-15T00:00:00+02:00</ns0:updated>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-14417-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-14417-2026-INIT/en/pdf</link>
+      <title>ST 14417 2026 INIT</title>
+      <description>AOB for the meeting of the EPSCO Council of 19 October 2026: European Disability Card and European Parking Card for persons with disabilities – Overcoming challenges in the implementation process and addressing QR code colour requirements and interoperability - Information from Italy, Finland, Lithuania, Netherlands and Slovakia</description>
+      <ns0:updated>2026-10-15T00:00:00+02:00</ns0:updated>
+    </item>
     <item>
       <guid isPermaLink="false">ST-14340-2026-INIT_EN</guid>
       <link>https://data.consilium.europa.eu/doc/document/ST-14340-2026-INIT/en/pdf</link>
       <title>ST 14340 2026 INIT</title>
       <description>AOB for the meeting of the Transport, Telecommunications and Energy Council on 29 October 2026 2026 Annual Progress Report on simplification, implementation and enforcement (Energy and Housing) - Information from the Commission</description>
       <ns0:updated>2026-10-14T00:00:00+02:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-14252-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-14252-2026-INIT/en/pdf</link>
-      <title>ST 14252 2026 INIT</title>
-      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 26-27 October 2026: Joint Declaration of the Ministers of Agriculture of the Visegrad Group and Bulgaria, Croatia, Romania and Slovenia on the need for an effective European response to natural and market disturbances affecting agriculture - Information from Slovakia, on behalf of Bulgaria, Croatia, Czechia, Hungary, Poland, Romania, Slovakia and Slovenia</description>
-      <ns0:updated>2026-10-12T00:00:00+02:00</ns0:updated>
     </item>
   </channel>
 </rss>
