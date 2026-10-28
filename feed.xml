@@ -7,6 +7,34 @@
     <language>en</language>
     <generator>GitHub Actions — Council AOB RSS</generator>
     <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
-    <lastBuildDate>Wed, 28 Oct 2026 02:18:43 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2026 08:50:22 +0000</lastBuildDate>
+    <item>
+      <guid isPermaLink="false">ST-14729-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-14729-2026-INIT/en/pdf</link>
+      <title>ST 14729 2026 INIT</title>
+      <description>AOB for the meeting of the Transport, Telecommunications and Energy Council on 29 October 2026 Political Message based on the Joint Declaration of Fuel Industry Associations “In Unstable Times Europe Needs Stable Energy Industry”, signed on 8 October 2026 in Sofia - Information from Bulgaria and Slovakia</description>
+      <ns0:updated>2026-10-27T00:00:00+01:00</ns0:updated>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-14726-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-14726-2026-INIT/en/pdf</link>
+      <title>ST 14726 2026 INIT</title>
+      <description>AOB for the meeting of the Transport, Telecommunications and Energy Council on 29 October 2026 The need for a long-term vision for the resilience and competitiveness of European refineries - Information from Poland, Czechia and Slovakia</description>
+      <ns0:updated>2026-10-26T00:00:00+01:00</ns0:updated>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-14676-2026-REV-1_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-14676-2026-REV-1/en/pdf</link>
+      <title>ST 14676 2026 REV 1</title>
+      <description>AOB item for the meeting of the "Agriculture and Fisheries" Council of 26 and 27 October 2026: Presence of the bacterium Xylella fastidiosa in the Luxembourg Moselle wine-growing region - Information from Luxembourg, supported by Belgium, Bulgaria, Croatia, Cyprus, Czechia, France, Hungary, Malta, Poland, Portugal, Romania, Slovakia and Slovenia</description>
+      <ns0:updated>2026-10-23T00:00:00+02:00</ns0:updated>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-14705-2026-REV-1_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-14705-2026-REV-1/en/pdf</link>
+      <title>ST 14705 2026 REV 1</title>
+      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 26-27 October 2026: Extension of the exceptional temporary EAFRD support to cover increased agricultural costs - Information from Italy, supported by Cyprus, Czechia, Romania and Slovakia</description>
+      <ns0:updated>2026-10-23T00:00:00+02:00</ns0:updated>
+    </item>
   </channel>
 </rss>
