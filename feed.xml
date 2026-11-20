@@ -7,7 +7,28 @@
     <language>en</language>
     <generator>GitHub Actions — Council AOB RSS</generator>
     <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
-    <lastBuildDate>Thu, 19 Nov 2026 21:30:29 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 02:36:25 +0000</lastBuildDate>
+    <item>
+      <guid isPermaLink="false">ST-15962-2026-INIT_EN</guid>
+      <title>ST 15962 2026 INIT</title>
+      <description>AOB item for the meeting of Justice and Home Affairs Council on 3-4 December 2026: Transfer of prisoners within the EU and to third countries - Information from Austria</description>
+      <ns0:updated>2026-11-19T00:00:00+01:00</ns0:updated>
+      <ns0:content>AOB item for the meeting of Justice and Home Affairs Council on 3-4 December 2026: Transfer of prisoners within the EU and to third countries - Information from Austria&lt;hr/&gt;The content of this document is not accessible. Nevertheless, a request for access can be sent to the &lt;a href="https://www.consilium.europa.eu/en/documents/public-register/request-document/"&gt;Access to documents &lt;/a&gt; department.</ns0:content>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-16040-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-16040-2026-INIT/en/pdf</link>
+      <title>ST 16040 2026 INIT</title>
+      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 23 November 2026: Geographical indications' protection in third countries' markets - Information from Italy, supported by Bulgaria, Czechia, Cyprus, France, Greece, Hungary, Poland, Portugal, Slovenia and Spain</description>
+      <ns0:updated>2026-11-19T00:00:00+01:00</ns0:updated>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-16041-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-16041-2026-INIT/en/pdf</link>
+      <title>ST 16041 2026 INIT</title>
+      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 23 November 2026: Livestock Strategy and Protein Action Plan – Presidency report - Information from the Presidency</description>
+      <ns0:updated>2026-11-19T00:00:00+01:00</ns0:updated>
+    </item>
     <item>
       <guid isPermaLink="false">ST-15623-2026-INIT_EN</guid>
       <title>ST 15623 2026 INIT</title>
@@ -91,13 +112,6 @@
       <title>ST 16084 2026 INIT</title>
       <description>AOB item for the meeting of the General Affairs Council on 19 November 2026 Technological neutrality in the next Multiannual Financial Framework - Information from Czech Republic and France</description>
       <ns0:updated>2026-11-18T00:00:00+01:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-15840-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-15840-2026-INIT/en/pdf</link>
-      <title>ST 15840 2026 INIT</title>
-      <description>AOB for the meeting of the Education, Youth, Culture and Sport Council on 19 and 20 November 2026: European cultural sovereignty: from shared ambitions to concrete action - Information from Bulgaria, Denmark, Germany, France, Poland, Portugal and Slovakia</description>
-      <ns0:updated>2026-11-17T00:00:00+01:00</ns0:updated>
     </item>
   </channel>
 </rss>
