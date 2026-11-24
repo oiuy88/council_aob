@@ -7,7 +7,28 @@
     <language>en</language>
     <generator>GitHub Actions — Council AOB RSS</generator>
     <ns0:link rel="self" type="application/rss+xml" href="https://oiuy88.github.io/council_aob/feed.xml" />
-    <lastBuildDate>Mon, 23 Nov 2026 22:48:21 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 06:42:55 +0000</lastBuildDate>
+    <item>
+      <guid isPermaLink="false">ST-15621-2026-INIT_EN</guid>
+      <link>https://data.consilium.europa.eu/doc/document/ST-15621-2026-INIT/en/pdf</link>
+      <title>ST 15621 2026 INIT</title>
+      <description>AOB for the meeting of EPSCO (Health) of 8 December 2026: State of Health Preparedness Report - Information from the Commission</description>
+      <ns0:updated>2026-11-23T00:00:00+01:00</ns0:updated>
+    </item>
+    <item>
+      <guid isPermaLink="false">ST-15799-2026-INIT_EN</guid>
+      <title>ST 15799 2026 INIT</title>
+      <description>AOB for the meeting of the Justice and Home Affairs Council on 3 and 4 December 2026: ‘Update on the application of the Schengen acquis in Cyprus’ - Information from the Commission</description>
+      <ns0:updated>2026-11-23T00:00:00+01:00</ns0:updated>
+      <ns0:content>AOB for the meeting of the Justice and Home Affairs Council on 3 and 4 December 2026: ‘Update on the application of the Schengen acquis in Cyprus’ - Information from the Commission&lt;hr/&gt;The content of this document is not accessible. Nevertheless, a request for access can be sent to the &lt;a href="https://www.consilium.europa.eu/en/documents/public-register/request-document/"&gt;Access to documents &lt;/a&gt; department.</ns0:content>
+    </item>
+    <item>
+      <guid isPermaLink="false">WK-18152-2026-INIT_EN</guid>
+      <title>WK 18152 2026 INIT</title>
+      <description>Working Party on International Food and Agricultural Questions (FAO) on 23 November 2026 - Item 9 (AOB): FAO Working Party’s programme in the first half of 2027 - Presentation by the Lithuanian delegation</description>
+      <ns0:updated>2026-11-23T00:00:00+01:00</ns0:updated>
+      <ns0:content>Working Party on International Food and Agricultural Questions (FAO) on 23 November 2026 - Item 9 (AOB): FAO Working Party’s programme in the first half of 2027 - Presentation by the Lithuanian delegation&lt;hr/&gt;The content of this document is not accessible. Nevertheless, a request for access can be sent to the &lt;a href="https://www.consilium.europa.eu/en/documents/public-register/request-document/"&gt;Access to documents &lt;/a&gt; department.</ns0:content>
+    </item>
     <item>
       <guid isPermaLink="false">ST-15949-2026-INIT_EN</guid>
       <title>ST 15949 2026 INIT</title>
@@ -35,27 +56,6 @@
       <title>ST 16183 2026 INIT</title>
       <description>AOB for the meeting of the EPSCO Council of 7 December 2026: Ukraine Recovery Conference 2027: A Recovery that Works for People - Information from Estonia</description>
       <ns0:updated>2026-11-20T00:00:00+01:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-15962-2026-INIT_EN</guid>
-      <title>ST 15962 2026 INIT</title>
-      <description>AOB item for the meeting of Justice and Home Affairs Council on 3-4 December 2026: Transfer of prisoners within the EU and to third countries - Information from Austria</description>
-      <ns0:updated>2026-11-19T00:00:00+01:00</ns0:updated>
-      <ns0:content>AOB item for the meeting of Justice and Home Affairs Council on 3-4 December 2026: Transfer of prisoners within the EU and to third countries - Information from Austria&lt;hr/&gt;The content of this document is not accessible. Nevertheless, a request for access can be sent to the &lt;a href="https://www.consilium.europa.eu/en/documents/public-register/request-document/"&gt;Access to documents &lt;/a&gt; department.</ns0:content>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-16040-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-16040-2026-INIT/en/pdf</link>
-      <title>ST 16040 2026 INIT</title>
-      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 23 November 2026: Geographical indications' protection in third countries' markets - Information from Italy, supported by Bulgaria, Czechia, Cyprus, France, Greece, Hungary, Poland, Portugal, Slovenia and Spain</description>
-      <ns0:updated>2026-11-19T00:00:00+01:00</ns0:updated>
-    </item>
-    <item>
-      <guid isPermaLink="false">ST-16041-2026-INIT_EN</guid>
-      <link>https://data.consilium.europa.eu/doc/document/ST-16041-2026-INIT/en/pdf</link>
-      <title>ST 16041 2026 INIT</title>
-      <description>AOB item for the meeting of the “Agriculture and Fisheries” Council on 23 November 2026: Livestock Strategy and Protein Action Plan – Presidency report - Information from the Presidency</description>
-      <ns0:updated>2026-11-19T00:00:00+01:00</ns0:updated>
     </item>
   </channel>
 </rss>
